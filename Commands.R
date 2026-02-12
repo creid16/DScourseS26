@@ -6,7 +6,13 @@
 # move files to my fork w/ bash
 # scp /c/Users/caleb/Downloads/PS2_Reid.tex /c/Users/caleb/Downloads/PS2_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/
 
+# color files green if executable, blue if folder/directory
+# chmod +x *batch
+
 # SQLite ####
+suppressMessages(library(tidyverse))
+suppressMessages(library(sqldf))
+
 df <- iris %>% as_tibble()
 
 sqldf('SELECT count(*) FROM df WHERE Species = "virginica"')
@@ -20,3 +26,16 @@ counted.dplyr <- df %>% filter(Species=="virginica") %>% count %>% print()
 # check if results are same
 identical(counted[[1]],counted.dplyr[[1]])
 
+# Purrr ####
+library(purrr)
+
+mtcars  %>%  
+  split(mtcars$cyl) %>%  # from base R
+  map(\(df) lm(mpg ~ wt, data = df)) %>% 
+  map(summary) %>%
+  map_dbl("r.squared")
+
+mtcars %>%
+  group_by(cyl) %>%
+  summarize(r_squared=summary(lm(mpg~wt,data=cur_data()))$r.squared,
+    .groups = "drop")
