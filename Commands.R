@@ -2,6 +2,7 @@
 
 # login
 # ssh ouecon010@schooner.oscer.ou.edu
+# Sys.getenv("OSCER_SSH")
 
 # move files to my fork w/ bash
 # scp /c/Users/caleb/Downloads/PS2_Reid.tex /c/Users/caleb/Downloads/PS2_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/
