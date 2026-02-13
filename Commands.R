@@ -5,7 +5,7 @@
 # Sys.getenv("OSCER_SSH")
 
 # move files to my fork w/ bash
-# scp /c/Users/caleb/Downloads/PS2_Reid.tex /c/Users/caleb/Downloads/PS2_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/
+# scp /c/Users/caleb/Downloads/PS3_Reid.tex /c/Users/caleb/Downloads/PS3_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS3
 
 # color files green if executable, blue if folder/directory
 # chmod +x *batch
@@ -26,6 +26,15 @@ counted.dplyr <- df %>% filter(Species=="virginica") %>% count %>% print()
 
 # check if results are same
 identical(counted[[1]],counted.dplyr[[1]])
+
+florida <- read_csv("/ProblemSets/PS3/FL_insurance_sample.csv")
+
+# CREATE TABLE florida(
+# "county" CHAR,
+# "tiv_2011" INTEGER,
+# "tiv_2012" INTEGER,
+# "construction" CHAR,
+# )
 
 # Purrr ####
 suppressMessages(library(purrr))
