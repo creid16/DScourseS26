@@ -9,3 +9,4 @@ df <- sc_init() %>%
     sc_select(unitid, instnm, stabbr, ugds) %>% 
     sc_year("latest") %>% 
     sc_get()
+

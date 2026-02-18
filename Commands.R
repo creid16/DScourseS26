@@ -85,3 +85,72 @@ result <- scrape(session,query=list(t="semi-soft",per_page=100)) %>%
   html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table:nth-child(17)") %>%
   html_table(fill=T)
 
+
+# Fredr ####
+## Load and install the packages that we'll be using today
+
+pacman::p_load(tidyverse, httr, lubridate, janitor, jsonlite, fredr, 
+               listviewer, usethis)
+
+endpoint <- "https://data.cityofnewyork.us/resource/nwxe-4ae8.json?$limit=68000"
+
+nyc_trees <- fromJSON(endpoint) %>%
+  as_tibble()
+
+nyc_trees %>% 
+  select(longitude, latitude, stump_diam, spc_common, spc_latin, tree_id) %>% 
+  mutate_at(vars(longitude:stump_diam), as.numeric) %>% 
+  ggplot(aes(x=longitude, y=latitude, size=stump_diam)) + 
+  geom_point(alpha=0.5) +
+  scale_size_continuous(name = "Stump diameter") +
+  labs(
+    x = "Longitude", y = "Latitude",
+    title = "Sample of New York City trees",
+    caption = "Source: NYC Open Data"
+  )
+
+names(nyc_trees)
+
+head(nyc_trees)
+
+# head(nyc_trees) %>% select(tree_id:health)
+
+# head(nyc_trees) %>% select(spc_latin:user_type)
+
+params = list(
+  api_key= Sys.getenv("FRED_API_KEY"), ## Get API directly and safely from the stored environment variable
+  file_type="json", 
+  series_id="GNPCA"
+)
+
+df <- fredr(
+  series_id="GNPCA",
+  observation_start=as.Date("1929-01-01"),
+  observation_end=as.Date("2026-01-01")
+)
+
+df <- fredr(
+  series_id="GNPCA",
+  observation_start=as.Date("1929-01-01"),
+  observation_end=as.Date("2026-01-01"),
+  frequency="a",
+  units="chg"
+)
+
+df %>%
+  ggplot(aes(date, value)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    x="Date", y="2012 USD (Billions)",
+    title="US Real Gross National Product", caption="Source: FRED"
+  )
+
+fred = 
+  httr::GET(
+    url = "https://api.stlouisfed.org/", ## Base URL
+    path = paste0("fred/", endpoint),    ## The API endpoint
+    query = params                       ## Our parameter list
+  )
+
+
