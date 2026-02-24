@@ -5,8 +5,8 @@
 # Sys.getenv("OSCER_SSH")
 
 # move files to my fork w/ bash
-# scp /c/Users/caleb/Downloads/PS3_Reid.tex /c/Users/caleb/Downloads/PS3_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS3
-
+# scp /c/Users/caleb/Downloads/PS4_Reid.tex /c/Users/caleb/Downloads/PS4_Reid.pdf ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS4
+# scp "C:/Users/caleb/Downloads/PS4_Reid.tex" "C:/Users/caleb/Downloads/PS4_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS4/
 # color files green if executable, blue if folder/directory
 # chmod +x *batch
 
@@ -157,3 +157,4 @@ fred =
 
 # PS4 ####
 # ~/bin/Rbatch PS4a_Reid.R events_output.log 1:00 redacted@ou.edu
+"C:\Users\caleb\Downloads\PS4_Reid.tex"
