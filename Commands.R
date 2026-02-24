@@ -157,4 +157,3 @@ fred =
 
 # PS4 ####
 # ~/bin/Rbatch PS4a_Reid.R events_output.log 1:00 redacted@ou.edu
-"C:\Users\caleb\Downloads\PS4_Reid.tex"
