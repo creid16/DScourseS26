@@ -1,0 +1,34 @@
+#!/usr/bin/env Rscript
+# =========================================
+# PS4a_LastName.R
+# OSCER batch R script for Homework PS4a
+# =========================================
+
+# Download the events JSON from the web
+system('wget -O ~/events.json "https://www.vizgr.org/historical-events/search.php?format=json&begin_date=00000101&end_date=20240209&lang=en"')
+
+# Optional: preview first 20 lines
+system('head -n 20 ~/events.json')
+
+# Load required libraries
+library(jsonlite)
+library(tidyverse)
+
+# Read JSON and flatten nested lists
+mylist <- fromJSON("~/events.json", flatten = TRUE)
+
+# Combine nested list elements into a tidy data frame
+mydf <- bind_rows(mylist$result[-1])
+
+# Inspect data
+print("Class of mydf:")
+print(class(mydf))
+print("Head of mydf:")
+print(head(mydf))
+
+# Optional: check type of date column if it exists
+if("date" %in% colnames(mydf)){
+  print("Class of date column:")
+  print(class(mydf$date))
+  
+  # Add year coprint("First 10

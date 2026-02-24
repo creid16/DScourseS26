@@ -1,0 +1,4 @@
+/home/ouecon010/DScourseS26/ProblemSets/PS4
+Tue Feb 24 10:31:48 CST 2026
+export LSCRATCH=/lscratch/29715324
+srun: error: c300: task 0: Exited with exit code 1
