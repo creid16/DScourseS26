@@ -1,0 +1,30 @@
+\documentclass{article}
+
+
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+
+
+
+\title{Problem Set 5}
+\author{Caleb Reid}
+
+\begin{document}
+    
+\maketitle
+
+I scraped data from  \href{https://www.espn.com/mens-college-basketball/stats/player}{ESPN's Men's College Basketball Points Leaders}. I am interested in the data because I like watching college basketball, and I enjoy comparing player stats. I could use this data in my final project of this class, or just for fun. I had to use ChatGPT to help me put the table into the correct form. I used the rvest package in R, but the table that I created has missing data and the columns were not properly named. However, after some help with ChatGPT I was able to get the data into a nice tidy form.  
+
+I scrapped data from \href{https://www.espn.com/mens-college-basketball/stats/player}{ESPN} to put together a table of NBA teams. The table included team name, abbreviation, and conference. I used the hhtr and jsonlite packages in RStudio. I find it very useful because sometimes you do not want to use full names of NBA teams when analyzing or visualizing data. For example, instead of Oklahoma City Thunder it would simply be OKC. It would take a long time to hard code the abbreviations for each team, so it would be faster to just join the data with this data frame on "name".
+
+\end{document}
