@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{subcaption}
+\usepackage{tabularray}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{siunitx}
+
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+
+\title{Problem Set 6}
+\author{Caleb Reid}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{table}[H] \centering \begin{tblr}{ colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]}, } \toprule & Unique & Missing Pct. & Mean & SD & Min & Median & Max \\ \midrule logwage & 670 & 25 & 1.6 & 0.4 & 0.0 & 1.7 & 2.3 \\ hgc & 16 & 0 & 13.1 & 2.5 & 0.0 & 12.0 & 18.0 \\ tenure & 259 & 0 & 6.0 & 5.5 & 0.0 & 3.8 & 25.9 \\ age & 13 & 0 & 39.2 & 3.1 & 34.0 & 39.0 & 46.0 \\ & & N & \% & & & & \\ college & college grad & 530 & 23.8 & & & & \\ & not college grad & 1699 & 76.2 & & & & \\ married & married & 1431 & 64.2 & & & & \\ & single & 798 & 35.8 & & & & \\ \bottomrule \end{tblr} \end{table}
+
+After removing rows with missing hgc or tenure, there was only missing data for logwage. Twenty-five percent, or one-fourth, of the logwage data was missing. With so much data missing it leads me to believe that data is missing not at random. If there were just a few missed wages here and there it would not be such a concern, but the amount of missing data is staggering and leads me to believe there is a pattern or reason for why data is missing.
+\begin{table}[H]
+\centering
+\begin{tblr}[         %% tabularray outer open
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+column{2,3,4,5}={}{halign=c,},
+column{1}={}{halign=l,},
+hline{14}={1,2,3,4,5}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Listwise Deletion & Mean Imputation & Predicted Values & Mice \\ \midrule %% TinyTableHeader
+(Intercept) & \num{0.639} & \num{0.833} & \num{0.639} & \num{0.701} \\
+& (\num{0.146}) & (\num{0.115}) & (\num{0.111}) & (\num{0.140}) \\
+hgc & \num{0.062} & \num{0.049} & \num{0.062} & \num{0.059} \\
+& (\num{0.005}) & (\num{0.004}) & (\num{0.004}) & (\num{0.006}) \\
+collegenot college grad & \num{0.146} & \num{0.160} & \num{0.146} & \num{0.102} \\
+& (\num{0.035}) & (\num{0.026}) & (\num{0.025}) & (\num{0.033}) \\
+tenure & \num{0.023} & \num{0.015} & \num{0.023} & \num{0.022} \\
+& (\num{0.002}) & (\num{0.001}) & (\num{0.001}) & (\num{0.001}) \\
+age & \num{-0.001} & \num{-0.001} & \num{-0.001} & \num{-0.000} \\
+& (\num{0.003}) & (\num{0.002}) & (\num{0.002}) & (\num{0.002}) \\
+marriedsingle & \num{-0.024} & \num{-0.029} & \num{-0.024} & \num{-0.015} \\
+& (\num{0.018}) & (\num{0.014}) & (\num{0.013}) & (\num{0.016}) \\
+Num.Obs. & \num{1669} & \num{2229} & \num{2229} & \num{2229} \\
+Num.Imp. &  &  &  & \num{5} \\
+R2 & \num{0.195} & \num{0.132} & \num{0.268} & \num{0.218} \\
+R2 Adj. & \num{0.192} & \num{0.130} & \num{0.266} & \num{0.216} \\
+AIC & \num{1206.1} & \num{1129.3} & \num{961.2} &  \\
+BIC & \num{1244.0} & \num{1169.3} & \num{1001.1} &  \\
+Log.Lik. & \num{-596.049} & \num{-557.651} & \num{-473.584} &  \\
+F & \num{80.508} & \num{67.496} & \num{162.884} &  \\
+RMSE & \num{0.35} & \num{0.31} & \num{0.30} &  \\
+\bottomrule
+\end{tblr}
+\end{table}
+
+The beta coefficients from the pooled table shows the relationship between the prediciotr variables (hgc, colleg grad/not college grad, tenure, age, and married/single) and the dependent variable (logwage). The row labeled hgc represents how much one year of schooling adds to wages. The listwise deletion and predicted values model had an almost identical beta coefficient of 0.062, meaning that one additional year would lead to an increase in wages of 6.2\%. The mice model showed that an additional year of schooling would return slightly less than that at 5.9\%. Lastly, the mean imputation model resulted in a much smaller beta coefficient of 0.049 or 4.9\% increase in wages.
+
+It is clear that the mean imputation model performed the worst of the other three models. It was the furthest way from the actual beta coefficient, 0.093, and was quite far off the other models. The listwise deletion and predicted values model performed about the same, but since the predicted values model has a lower standard error, it it preferred over the listwise deletion model. Lastly, the Mice model seemed to perform worse than the listwise deletion and predicted valeus model due to a smaller beta coefficient and higher standard error. However, if data is missing not at random,  like I hypothesized, then the mice model is the preferred model because it assumes data is missing not at random.
+
+I have not had the opportunity to begin working on my final project, but I like to run regression models to try to predict data. I have worked with linear and logistic regression in the past, but the type of model chosen will depend on the data I select for my project. I will most likely try to scrape sports data or find some interesting data sets related to sports on Kaggle.
+
+\end{document}
