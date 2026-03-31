@@ -11,6 +11,9 @@
 # color files green if executable, blue if folder/directory
 # chmod +x *batch
 
+# scp "C:/Users/caleb/Downloads/PS6_Reid.R" "C:/Users/caleb/Downloads/PS6_Reid.tex" "C:/Users/caleb/Downloads/PS6_Reid.pdf" "C:/Users/caleb/Downloads/PS6a_Reid.png" "C:/Users/caleb/Downloads/PS6b_Reid.png" "C:/Users/caleb/Downloads/PS6c_Reid.png"  ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS6/
+
+
 # SQLite ####
 suppressMessages(library(tidyverse))
 suppressMessages(library(sqldf))
@@ -154,7 +157,7 @@ fred =
 
 # PS4 ####
 # ~/bin/Rbatch PS4a_Reid.R events_output.log 1:00 redacted@ou.edu
-#PS5 ####
+# PS5 ####
 # SelectorGadget 
 # Libraries
 suppressMessages(library(rvest))
@@ -225,3 +228,32 @@ standings <- rbind(east_df, west_df)
 
 # Print data frame
 standings
+
+# Nloptr ####
+library(nloptr)
+alpha <- 0.003
+
+iter <- 500
+
+gradient <- function(x) return((4*x^3) - (9*x^2))
+
+set.seed(100)
+
+x <- floor(runif(1)*10)
+
+x.All <- vector("numeric",iter)
+
+for(i in 1:iter) {
+  x <- x - alpha*gradient(x)
+  x.All[i] <- x
+  print(x)
+}
+
+print(paste("The minimun of f(x) is ", gradient(x), sep=""))
+
+# Five inputs needed for nloptr
+# 1. Objective function
+# 2. Gradient vector of the objective function
+# 3. Algorithm
+# 4. Initial value
+# 5. Tolerance parameters
