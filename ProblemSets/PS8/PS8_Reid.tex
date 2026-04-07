@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{subcaption}
+\usepackage{tabularray}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{siunitx}
+
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+
+\title{Problem Set 8}
+\author{Caleb Reid}
+
+\begin{document}
+
+\maketitle
+
+The estimated betas of the OLS closed-form solution closely aligned with the true beta values defined previously. The estimated betas did not exactly align with the true betas but they were very close. Most estimates were just 1/1000 off. For example, the true beta of -2.00 was estimated to be -1.9994365.
+
+The estimated betas from the OLS batch gradient descent algorithm also returned values close to the true value of beta. The only difference is that batch gradient reported out to 14 decimal places as opposed to 7 from the OLS closed-form solution.
+
+Calculating beta using OLS L-BFGS algorithm once again returned beta values that were extremely close to the true value of beta. On the other hand, the Nelder-Mead algorithm was quite a ways off. For example, the first value of beta, 1.5, was reported to be 1.2712137 according got the Nelder-Mead algorithm.
+
+MLE estimation with L-BFGS returned estimated betas out to 6 decimal places that were once again extremely close to the true values of beta.
+
+Lastly, calculating beta OLS using a simple linear model was also close to finding the true values of beta. The summary table for the linear model can be found below.
+\begin{table}
+\centering
+\begin{tblr}[         %% tabularray outer open
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]},
+column{2}={}{halign=c,},
+column{1}={}{halign=l,},
+hline{22}={1,2}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& (1) \\ \midrule %% TinyTableHeader
+X1 & \num{1.501} \\
+& (\num{0.002}) \\
+X2 & \num{-0.996} \\
+& (\num{0.002}) \\
+X3 & \num{-0.249} \\
+& (\num{0.002}) \\
+X4 & \num{0.747} \\
+& (\num{0.002}) \\
+X5 & \num{3.502} \\
+& (\num{0.002}) \\
+X6 & \num{-1.999} \\
+& (\num{0.002}) \\
+X7 & \num{0.501} \\
+& (\num{0.002}) \\
+X8 & \num{0.999} \\
+& (\num{0.002}) \\
+X9 & \num{1.253} \\
+& (\num{0.002}) \\
+X10 & \num{1.999} \\
+& (\num{0.002}) \\
+Num.Obs. & \num{100000} \\
+R2 & \num{0.991} \\
+R2 Adj. & \num{0.991} \\
+AIC & \num{144993.2} \\
+BIC & \num{145097.9} \\
+Log.Lik. & \num{-72485.615} \\
+RMSE & \num{0.50} \\
+\bottomrule
+\end{tblr}
+\end{table}
+
+
+
+
+\end{document}
