@@ -1,16 +1,17 @@
 library(nloptr)
 # Our objective function
 eval_f <- function(x) {
-return( x[1]^4 - 3*x[1]^3 + 2 )
+return( sum((Y-X%*%x)^2) )
 }
 
 # Gradient of our objective function
 eval_grad_f <- function(x) {
-return( 4*x[1]^3 - 9*x[1]^2 )
+return( as.vector(-2*t(X)%*%(Y-X%*%x)) )
 }
 
 # initial values
-x0 <- 6.25
+set.seed(100)
+x0 <- runif(ncol(X))
 
 # Algorithm parameters
 opts <- list("algorithm"="NLOPT_LD_LBFGS","xtol_rel"=1.0e-6)
@@ -24,7 +25,7 @@ print(res)
 
 
 # initial values
-xstart <- 2.25
+xstart <- x0
 
 # Algorithm parameters
 options <- list("algorithm"="NLOPT_LN_NELDERMEAD","xtol_rel"=1.0e-8)
