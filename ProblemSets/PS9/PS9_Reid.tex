@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{subcaption}
+\usepackage{tabularray}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{siunitx}
+
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+
+\title{Problem Set 9}
+\date{April 14, 2026}
+\author{Caleb Reid}
+
+\begin{document}
+
+\maketitle
+
+The optimal value of $\lambda$  for the LASSO model, identified by 6-fold cross validation, was 0.00356. The in-sample and out-sample Root Mean Square Errors (RMSE) were 0.0735 and 0.172, respectively.
+
+For the ridge model, the penalty parameter or $\lambda$ was equal to 0.0233. In-sample RMSE was equal to 0.0687 and the out-of-sample RMSE was 0.173.
+
+It is not possible to estimate a simple linear regression model when the number of columns is greater than the number of observations or K \textgreater  n. In terms of the bias-variance tradeoff, both models are in the "Goldilocks zone" of the bias-variance curve. The models performed similarly on the test or out-of-sample data as they did on the training or in-sample data.  The low RMSE values show that the models are not overfitting on the in-sample data.
+
+\end{document}
