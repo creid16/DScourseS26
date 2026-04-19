@@ -58,7 +58,6 @@ ols_predicted <- predict(est.ols, newdata = housing_test_x)
 # Root mean-squared error
 sqrt(mean((housing_test_y$medv - ols_predicted)^2))
 
-
 # easy way
 est.ols.easy <- lm(log(medv) ~ crim + zn + indus + as.factor(chas) + 
                      rm + age + rad + tax + ptratio + b + 
