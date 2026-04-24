@@ -15,6 +15,8 @@
 # scp "C:/Users/caleb/Downloads/PS7_Reid.R" "C:/Users/caleb/Downloads/PS7_Reid.tex" "C:/Users/caleb/Downloads/PS7_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS7/
 # scp "C:/Users/caleb/Downloads/PS8_Reid.R" "C:/Users/caleb/Downloads/PS8_Reid.tex" "C:/Users/caleb/Downloads/PS8_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS8/
 # scp "C:/Users/caleb/Downloads/PS9_Reid.R" "C:/Users/caleb/Downloads/PS9_Reid.tex" "C:/Users/caleb/Downloads/PS9_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS9/
+# scp "C:/Users/caleb/Downloads/PS10_Reid.R" "C:/Users/caleb/Downloads/PS10_Reid.tex" "C:/Users/caleb/Downloads/PS10_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS10/
+# scp "C:/Users/caleb/Downloads/PS11_Reid.bib" "C:/Users/caleb/Downloads/PS11_Reid.tex" "C:/Users/caleb/Downloads/PS11_Reid.pdf" ouecon010@schooner.oscer.ou.edu:~/DScourseS26/ProblemSets/PS11/
 
 
 # SQLite ####

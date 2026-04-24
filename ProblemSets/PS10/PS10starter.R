@@ -148,12 +148,40 @@ tune_tree_spec <- decision_tree(
 
 # define a set over which to try different values of the regularization parameter (complexity, depth, etc.)
 tree_parm_df1 <- tibble(cost_complexity = seq(.001,.2,by=.05))
-tree_parm_df2 <- tibble(min_n = seq(10,100,by=10))
+tree_parm_df2 <- tibble(min_n = seq(10,50,by=10))
 tree_parm_df3 <- tibble(tree_depth = seq(5,20,by=5))
 tree_parm_df  <- full_join(tree_parm_df1,tree_parm_df2,by=character()) %>% full_join(.,tree_parm_df3,by=character())
 
 # YOU FILL IN THE REST
+# Workflow
+tree_wf <- workflow() %>%
+  add_model(tune_tree_spec) %>%
+  add_formula(high.earner ~ education + marital.status + race + workclass + occupation + relationship + sex + age + capital.gain + capital.loss + hours)
 
+# Tune
+tree_res <- tree_wf %>%
+  tune_grid(
+    resamples = rec_folds,
+    grid = tree_parm_df
+  )
+
+# Best params
+top_acc  <- show_best(tree_res, metric = "accuracy")
+best_acc <- select_best(tree_res, metric = "accuracy")
+
+# Final model
+final_tree <- finalize_workflow(tree_wf, best_acc)
+
+# Test performance
+tree_test <- last_fit(final_tree, income_split) %>%
+  collect_metrics()
+
+# Store results
+tree_ans <- top_acc %>% slice(1)
+tree_ans %<>% left_join(tree_test %>% slice(1),
+                        by = c(".metric",".estimator")) %>%
+  mutate(alg = "tree") %>%
+  select(-starts_with(".config"))
 
 
 
@@ -166,7 +194,7 @@ tune_nnet_spec <- mlp(
   hidden_units = tune(), # tuning parameter
   penalty = tune()
 ) %>% 
-  set_engine("nnet") %>%
+  set_engine("nnet",trace=FALSE) %>%
   set_mode("classification")
 
 # define a set over which to try different values of the regularization parameter (number of neighbors)
@@ -176,7 +204,35 @@ nnet_parm_df  <- full_join(nnet_parm_df1,lambda_grid,by=character())
 
 # YOU FILL IN THE REST
 
+# Workflow
+nnet_wf <- workflow() %>%
+  add_model(tune_nnet_spec) %>%
+  add_formula(high.earner ~ education + marital.status + race + workclass + occupation + relationship + sex + age + capital.gain + capital.loss + hours)
 
+# Tune
+nnet_res <- nnet_wf %>%
+  tune_grid(
+    resamples = rec_folds,
+    grid = nnet_parm_df
+  )
+
+# Best params
+top_acc  <- show_best(nnet_res, metric = "accuracy")
+best_acc <- select_best(nnet_res, metric = "accuracy")
+
+# Final model
+final_nnet <- finalize_workflow(nnet_wf, best_acc)
+
+# Test performance
+nnet_test <- last_fit(final_nnet, income_split) %>%
+  collect_metrics()
+
+# Store results
+nnet_ans <- top_acc %>% slice(1)
+nnet_ans %<>% left_join(nnet_test %>% slice(1),
+                        by = c(".metric",".estimator")) %>%
+  mutate(alg = "nnet") %>%
+  select(-starts_with(".config"))
 
 
 #####################
@@ -194,7 +250,35 @@ tune_knn_spec <- nearest_neighbor(
 knn_parm_df <- tibble(neighbors = seq(1,30))
 
 # YOU FILL IN THE REST
+# Workflow
+knn_wf <- workflow() %>%
+  add_model(tune_knn_spec) %>%
+  add_formula(high.earner ~ education + marital.status + race + workclass + occupation + relationship + sex + age + capital.gain + capital.loss + hours)
 
+# Tune
+knn_res <- knn_wf %>%
+  tune_grid(
+    resamples = rec_folds,
+    grid = knn_parm_df
+  )
+
+# Best params
+top_acc  <- show_best(knn_res, metric = "accuracy")
+best_acc <- select_best(knn_res, metric = "accuracy")
+
+# Final model
+final_knn <- finalize_workflow(knn_wf, best_acc)
+
+# Test performance
+knn_test <- last_fit(final_knn, income_split) %>%
+  collect_metrics()
+
+# Store results
+knn_ans <- top_acc %>% slice(1)
+knn_ans %<>% left_join(knn_test %>% slice(1),
+                       by = c(".metric",".estimator")) %>%
+  mutate(alg = "knn") %>%
+  select(-starts_with(".config"))
 
 
 #####################
@@ -216,7 +300,36 @@ svm_parm_df  <- full_join(svm_parm_df1,svm_parm_df2,by=character())
 
 # YOU FILL IN THE REST
 
+# Workflow
+svm_wf <- workflow() %>%
+  add_model(tune_svm_spec) %>%
+  add_formula(high.earner ~ education + marital.status + race + workclass + occupation + relationship + sex + age + capital.gain + capital.loss + hours)
 
+# Tune
+svm_res <- svm_wf %>%
+  tune_grid(
+    resamples = rec_folds,
+    grid = svm_parm_df,
+    metrics = metric_set(accuracy)
+  )
+
+# Best params
+top_acc  <- show_best(svm_res, metric = "accuracy")
+best_acc <- select_best(svm_res, metric = "accuracy")
+
+# Final model
+final_svm <- finalize_workflow(svm_wf, best_acc)
+
+# Test performance
+svm_test <- last_fit(final_svm, income_split) %>%
+  collect_metrics()
+
+# Store results
+svm_ans <- top_acc %>% slice(1)
+svm_ans %<>% left_join(svm_test %>% slice(1),
+                       by = c(".metric",".estimator")) %>%
+  mutate(alg = "svm") %>%
+  select(-starts_with(".config"))
 
 
 
@@ -226,7 +339,7 @@ svm_parm_df  <- full_join(svm_parm_df1,svm_parm_df2,by=character())
 #####################
 # combine answers
 #####################
-all_ans <- bind_rows(logit_ans,tree_ans,nnet_ans,knn_ans,svm_ans)
+all_ans <- bind_rows(logit_ans,tree_ans,nnet_ans,knn_ans)
 datasummary_df(all_ans %>% select(-.metric,-.estimator,-mean,-n,-std_err),output="markdown") %>% print
-
+write_csv(all_ans,"all_ans.csv")
 

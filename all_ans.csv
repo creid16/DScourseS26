@@ -1,0 +1,5 @@
+penalty,.metric,.estimator,mean,n,std_err,.estimate,alg,cost_complexity,tree_depth,min_n,hidden_units,neighbors
+1e-10,accuracy,binary,0.8456696786306607,3,0.0020429827437955053,0.8526024873330262,logit,NA,NA,NA,NA,NA
+NA,accuracy,binary,0.8593749597901759,3,5.331057796690827e-4,0.868417012129587,tree,0.001,15,10,NA,NA
+1,accuracy,binary,0.8487791985669026,3,0.0018501689143963112,0.8436972209427299,nnet,NA,NA,NA,7,NA
+NA,accuracy,binary,0.8382985606954533,3,0.0017875380407292544,0.8433901427913404,knn,NA,NA,NA,NA,30
