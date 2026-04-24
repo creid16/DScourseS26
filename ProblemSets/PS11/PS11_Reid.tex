@@ -1,0 +1,41 @@
+
+\documentclass{article}
+
+\usepackage{natbib} 
+\usepackage{indentfirst}
+\setlength{\parindent}{0.5in}
+
+\title{Problem Set 11}
+\date{April 28, 2026}
+\author{Caleb Reid}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Each year the Southeastern Conference recognizes the top performing student-athletes in NCAA Division I (D1) women’s soccer with its all-SEC awards. The top performing athletes from the regular season are placed in three categories: first-team, second-team, or third-team, with first-team all-SEC being the most prestigious honor. The awards are voted on by the league’s 16 coaches following the conclusion of the regular season \cite{sec2025}.
+To better understand how student-athletes can earn these awards, an analytical approach is needed. Wyscout, the largest soccer data and video database in the world \cite{wyscout}, enables the ability to explore the relationship between earning an all-SEC honor and the SEC soccer data provided by Wyscout.
+
+\section{Literature Review}
+Previous research has explored the relationship between visual tracking speed (VTS) and performance data, collected by Wyscout, in SEC women’s soccer \cite{phillips2022,phillips2023}. Phillips and Andre’s study revealed that the relationship between VTS and passing accuracy was nonsignificant (r  = -0.380). Furthermore, Phillips et al. did not find any significant differences in performance metrics after a three-dimensional motion object tracking (3D-MOT) training intervention (p $>$ 0.05). On another note, the relationship between match performance indicators (MPI), collected by Wyscout, and GPS data has been explored in D1 women’s soccer \cite{sam2023}. A statistically significant relationship was found between hard running distance (HRD) and MPIs (0.639 $\leq$ r $\leq$ 0.992). However, no literature exists exploring the relationship between all-SEC awards, or any NCAA awards for that matter, and performance data provided by Wyscout.
+
+\section{Data}
+DI soccer data was collected over three SEC regular seasons, 2023-2025, utilizing Wyscout. Attacking metrics included goals, assists, shots, second assists, passes, and duels. Defensive metrics included defensive duels, aerial duels, recoveries, interceptions, sliding tackles, and shots blocked. A total of [\# of SEC soccer players from 2023-2025] were included in this study. Wyscout only provided performance metrics, per 90 minutes played, for athletes who placed in the top 10 of said metric.
+SEC award information was collected from secsports.com from 2023-2025. The categories of interest were first, second, or third-team all-SEC.
+To compile a database of all SEC soccer athletes from 2023-2025 \cite{sec2023,sec2024,sec2025}, rosters were scraped from each individual team’s websites with the help of ChatGPT \cite{chatgpt2026}.
+
+\section{Methods}
+For each individual season, a nominal binary variable (0,1) was assigned to each athlete based on their inclusion in the top 10 of each Wyscout performance metric, where one means they were among the top 10 in the category. Similarly, athletes were denoted by 0 or 1 if they earned an all-SEC recognition for that season. 
+To explore the relationship between Wyscout performance metrics and all-SEC award recognition, a binary logistic regression model was created using the glm package in RStudio (version 2026.01.2+418A).
+
+\section{Findings}
+The anticipated findings are that the model is a weak predictor of all-SEC honors.
+
+\section{Conclusion}
+While inclusion in the top 10 of a given performance record should theoretically give you a good chance of earning a place on one of the all-SEC teams, the reality is that there are many more factors that account for why an athlete is selected. The conference’s 16 coaches are responsible for voting on the awards, and past experiences with these athletes can cause bias in their decisions. For example, most of the coaches know the athletes in the conference as recruiting is very competitive in the SEC. Therefore, coaches have probably had interactions with these athletes and could affect their decision come voting time based on their opinion of the athlete and their personality, which is unrelated to performance. Furthermore, the Transfer Portal opens up opportunities for athletes to move schools at the end of the year, meaning that some athletes will have played for multiple SEC schools in their collegiate career. It is possible that some athletes may not receive a vote because the coach who recruited that athlete does not like that they left their school and joined another program within the conference.
+
+\bibliographystyle{unsrt}
+\bibliography{PS11_Reid}
+
+
+\end{document}
